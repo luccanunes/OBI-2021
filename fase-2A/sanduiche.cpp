@@ -1,10 +1,9 @@
 #include <bits/stdc++.h>
-#define endl "\n"
 
 using namespace std;
 
 int n, m, a, b, ans;
-set<int> adj[25];
+vector<int> adj[25];
 
 bool valid(set<int> s) {
     for (int x : s)
@@ -29,8 +28,8 @@ int main() {
     scanf("%d%d", &n, &m);
     for (int i = 0; i < m; i++) {
         scanf("%d%d", &a, &b);
-        adj[a].insert(b);
-        adj[b].insert(a);
+        adj[a].push_back(b);
+        adj[b].push_back(a);
     }
     set<int> s;
     genSanduiche(1, s);
