@@ -3,9 +3,7 @@
 
 using namespace std;
 
-set<set<int>> sanduiches;
-
-int n, m, a, b;
+int n, m, a, b, ans;
 set<int> adj[25];
 
 bool valid(set<int> s) {
@@ -15,14 +13,14 @@ bool valid(set<int> s) {
     return true;
 }
 
-void genSanduiche(int i, set<int> v) {
+void genSanduiche(int i, set<int> subarr) {
     if (i == n + 1) {
-        if (v.size() != 0 && valid(v))
-            sanduiches.insert(v);
+        if (subarr.size() != 0 && valid(subarr))
+            ans++;
     } else {
-        genSanduiche(i + 1, v);
-        v.insert(i);
-        genSanduiche(i + 1, v);
+        genSanduiche(i + 1, subarr);
+        subarr.insert(i);
+        genSanduiche(i + 1, subarr);
     }
     return;
 }
@@ -34,9 +32,8 @@ int main() {
         adj[a].insert(b);
         adj[b].insert(a);
     }
-    int ans = n;
     set<int> s;
     genSanduiche(1, s);
-    cout << sanduiches.size() << endl;
+    printf("%d\n", ans);
     return 0;
 }
